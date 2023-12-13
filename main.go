@@ -23,8 +23,7 @@ type Profile struct{
 	Employee 	User `json:"employee"`
 }
 
-func getAllProfiles(q http.ResponseWriter, r *http.Request)
-{
+func getAllProfiles(q http.ResponseWriter, r *http.Request){
 	q.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(q).Encode(profiles)
 }
@@ -44,5 +43,6 @@ func main() {
 
 	router.HandleFunc("/profiles", addItem).Methods("POST")
 	router.HandleFunc("/profiles", getAllProfiles).Methods("GET")
+	
 	http.ListenAndServe(":5000", router)
 }
