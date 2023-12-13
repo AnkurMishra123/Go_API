@@ -57,12 +57,35 @@ func getProfile(q http.ResponseWriter, r *http.Request){
 	json.NewEncoder(q).Encode(profile)
 }
 
+func updateProfile(q http.ResponseWriter, r *http.Request){
+	var idParam string = mux.Vars(r)["id"]
+	id, err:= strconv.Atoi(idParam)
+	if err!=nil{
+		q.WriteHeader(400)
+		q.Write([]byte("ID could not be converted to Integer"))
+	}
+
+	if id>=len(profiles){
+		q.WriteHeader(404)
+		q.Write([]byte("no profile found with specified ID"))
+		return
+	}
+
+	var updateProfile Profile
+	json.NewDecoder(r.Body).Decode(&updateProfile)
+
+	profiles[id]=updateProfile
+	q.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(q).Encode(updateProfile)
+}
+
+
 func main() {
 	router:= mux.NewRouter()
 
 	router.HandleFunc("/profiles", addItem).Methods("POST")
 	router.HandleFunc("/profiles", getAllProfiles).Methods("GET")
 	router.HandleFunc("/profiles/{id}", getProfile).Methods("GET")
-
+	router.HandleFunc("/profiles/{id}", updateProfile).Methods("PUT")
 	http.ListenAndServe(":5000", router)
 }
