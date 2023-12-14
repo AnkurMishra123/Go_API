@@ -88,7 +88,6 @@ func getUser(db *sql.DB) http.HandlerFunc {
 }
 
 // create user 
-
 func createUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var u User
@@ -102,3 +101,5 @@ func createUser(db *sql.DB) http.HandlerFunc {
 		json.NewEncoder(w).Encode(u)
 	}
 }
+
+
