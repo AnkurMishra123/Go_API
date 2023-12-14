@@ -78,7 +78,6 @@ func getUser(db *sql.DB) http.HandlerFunc {
 		var u User
 		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&u.ID, &u.Name, &u.Email)
 		if err != nil {
-			log.Fatal(err)
 			w.WriteHeader(http.StatusNotFound)
 			return
 		}
@@ -87,7 +86,7 @@ func getUser(db *sql.DB) http.HandlerFunc {
 	}
 }
 
-// create user 
+// create user
 func createUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var u User
@@ -100,7 +99,22 @@ func createUser(db *sql.DB) http.HandlerFunc {
 
 		json.NewEncoder(w).Encode(u)
 	}
-	
 }
 
+// update user
+func updateUser(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		var u User
+		json.NewDecoder(r.Body).Decode(&u)
 
+		vars := mux.Vars(r)
+		id := vars["id"]
+
+		_, err := db.Exec("UPDATE users SET name = $1, email = $2 WHERE id = $3", u.Name, u.Email, id)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		json.NewEncoder(w).Encode(u)
+	}
+}
