@@ -118,3 +118,26 @@ func updateUser(db *sql.DB) http.HandlerFunc {
 		json.NewEncoder(w).Encode(u)
 	}
 }
+// delete user
+func deleteUser(db *sql.DB) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		id := vars["id"]
+
+		var u User
+		err := db.QueryRow("SELECT * FROM users WHERE id = $1", id).Scan(&u.ID, &u.Name, &u.Email)
+		if err != nil {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		} else {
+			_, err := db.Exec("DELETE FROM users WHERE id = $1", id)
+			if err != nil {
+				//todo : fix error handling
+				w.WriteHeader(http.StatusNotFound)
+				return
+			}
+	
+			json.NewEncoder(w).Encode("User deleted")
+		}
+	}
+}
