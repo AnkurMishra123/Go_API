@@ -87,7 +87,8 @@ func getUser(db *sql.DB) http.HandlerFunc {
 	}
 }
 
-// create user
+// create user 
+
 func createUser(db *sql.DB) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var u User
