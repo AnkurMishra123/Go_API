@@ -27,7 +27,7 @@ Check out the documentation [here](https://ankur-docs-car-garage.netlify.app/).
 
 ## Steps To Run
 
-1. `git clone https://github.com/AnkurMishra123/Go_API.git
+1. `git clone https://github.com/AnkurMishra123/Go_API.git`
 2. `go mod tidy`
 3. `docker run -d --name your-mysql-container -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=yourdb -e MYSQL_USER=username -e MYSQL_PASSWORD=password -p 3306:3306 mysql:latest`
 4. `go run .`
