@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  description: |
+    Welcome to the Car Garage API, the official interface for managing cars in a garage.
+  version: "1.0.0"
+  title: Car Garage
+  contact:
+    email: ankurmishra0043@gmail.com
+servers:
+  - url: "http://localhost:3000/"
+paths:
+  /cars:
+    post:
+      summary: Add a car to the garage
+      description: Add a new car to the garage.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        "200":
+          description: Car added successfully
+          content:
+            application/json:
+              example: "Car added successfully!"
+
+    get:
+      summary: Get cars in the garage
+      description: Retrieve the list of cars in the garage.
+      responses:
+        "200":
+          description: Cars retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CarList"
+
+  /cars/{id}:
+    get:
+      summary: Get a car by ID
+      description: Retrieve information about a specific car.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the car to retrieve.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Car retrieved successfully
+          content:
+            application/json:
+              $ref: "#/components/schemas/Car"
+
+    put:
+      summary: Update a car by ID
+      description: Update information about a specific car.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the car to update.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        "200":
+          description: Car updated successfully
+          content:
+            application/json:
+              $ref: "#/components/schemas/Car"
+
+    delete:
+      summary: Remove a car by ID
+      description: Remove a specific car from the garage.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the car to remove.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Car removed successfully
+          content:
+            application/json:
+              example: null
+
+components:
+  schemas:
+    Car:
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        color:
+          type: string
+        status:
+          type: string
+      required:
+        - brand
+        - model
+        - color
+        - status
+
+    CarList:
+      type: array
+      items:
+        $ref: "#/components/schemas/Car"
