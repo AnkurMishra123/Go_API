@@ -1,5 +1,5 @@
 # Car Garage 
-![legoshichat](https://img.freepik.com/premium-vector/car-garage-logo-design-template_500101-170.jpg?w=740)
+![legoshichat](https://us.123rf.com/450wm/listygrey/listygrey2004/listygrey200400074/144873445-car-outline-automotive-sign-for-your-projects.jpg?ver=6)
 
 Welcome to the Car Garage API, the official interface for managing cars in a garage. Experience the integration and access the unique features of Car Garage through this official API.
 
