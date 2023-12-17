@@ -33,14 +33,14 @@ func (cc *CarController) GetCarInGarage(id int) (models.Car, error) {
 }
 
 // UpdateCarInGarage updates a car in the garage by ID
-func (cc *CarController) UpdateCarInGarage(id int, car models.Car) error {
+func (cc *CarController) UpdateCarInGarage(id int, car models.Car) (*models.Car, error) {
 	db := utilities.GetDB()
 	_, err := db.Exec("UPDATE cars SET brand = ?, model = ?, color = ?, status = ? WHERE id = ?",
 		car.Brand, car.Model, car.Color, car.Status, id)
 	if err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return &car , nil
 }
 
 // RemoveCarFromGarage removes a car from the garage by ID
@@ -54,21 +54,26 @@ func (cc *CarController) RemoveCarFromGarage(id int) error {
 }
 
 // GetCarsInGarage gets all cars in the garage
-func (cc *CarController) GetCarsInGarage() ([]models.Car, error) {
+func (cc *CarController) GetCarsInGarage() (*[]models.Car, error) {
 	db := utilities.GetDB()
 	var cars []models.Car
 	rows, err := db.Query("SELECT * FROM cars")
 	if err != nil {
-		return cars, err
+		// return empty list
+		return nil, err
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var car models.Car
 		err := rows.Scan(&car.ID, &car.Brand, &car.Model, &car.Color, &car.Status)
 		if err != nil {
-			return cars, err
+			return nil, err
 		}
 		cars = append(cars, car)
 	}
-	return cars, nil
+	return &cars, nil
 }
+
+
+
+
