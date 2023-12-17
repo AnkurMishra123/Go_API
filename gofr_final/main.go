@@ -23,7 +23,7 @@ func main() {
 
 	app.Server.ValidateHeaders = false
 
-app.POST( "/cars", carHandler.AddCarToGarage)
+	app.POST( "/cars", carHandler.AddCarToGarage)
 	app.GET( "/cars", carHandler.GetCarsInGarage)
 	app.GET( "/cars/{id}", carHandler.GetCarInGarage)
 	app.PUT( "/cars/{id}", carHandler.UpdateCarInGarage)
