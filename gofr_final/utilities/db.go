@@ -8,7 +8,6 @@ import (
 
 var db *sql.DB
 
-// ConnectDB connects to MySQL database
 func ConnectDB() (*sql.DB, error) {
 	dataSourceName := "username:password@tcp(localhost:3306)/yourdb"
 
@@ -27,7 +26,6 @@ func ConnectDB() (*sql.DB, error) {
 	return db, nil
 }
 
-// GetDB returns the database connection
 func GetDB() *sql.DB {
 	return db
 }

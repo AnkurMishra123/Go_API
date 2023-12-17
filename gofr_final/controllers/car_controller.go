@@ -7,7 +7,6 @@ import (
 
 type CarController struct{}
 
-// AddCarToGarage adds a car to the garage in the database
 func (cc *CarController) AddCarToGarage(car models.Car) error {
 	db := utilities.GetDB()
 	_, err := db.Exec("INSERT INTO cars (brand, model, color, status) VALUES (?, ?, ?, ?)",
@@ -18,10 +17,6 @@ func (cc *CarController) AddCarToGarage(car models.Car) error {
 	return nil
 }
 
-// Other CRUD operations for cars in the garage
-// UpdateCarInGarage, GetCarsInGarage, RemoveCarFromGarage, etc.
-
-// GetCarInGarage gets a car in the garage by ID
 func (cc *CarController) GetCarInGarage(id int) (models.Car, error) {
 	db := utilities.GetDB()
 	var car models.Car
@@ -32,7 +27,6 @@ func (cc *CarController) GetCarInGarage(id int) (models.Car, error) {
 	return car, nil
 }
 
-// UpdateCarInGarage updates a car in the garage by ID
 func (cc *CarController) UpdateCarInGarage(id int, car models.Car) (*models.Car, error) {
 	db := utilities.GetDB()
 	_, err := db.Exec("UPDATE cars SET brand = ?, model = ?, color = ?, status = ? WHERE id = ?",
@@ -43,7 +37,6 @@ func (cc *CarController) UpdateCarInGarage(id int, car models.Car) (*models.Car,
 	return &car , nil
 }
 
-// RemoveCarFromGarage removes a car from the garage by ID
 func (cc *CarController) RemoveCarFromGarage(id int) error {
 	db := utilities.GetDB()
 	_, err := db.Exec("DELETE FROM cars WHERE id = ?", id)
@@ -53,13 +46,11 @@ func (cc *CarController) RemoveCarFromGarage(id int) error {
 	return nil
 }
 
-// GetCarsInGarage gets all cars in the garage
 func (cc *CarController) GetCarsInGarage() (*[]models.Car, error) {
 	db := utilities.GetDB()
 	var cars []models.Car
 	rows, err := db.Query("SELECT * FROM cars")
 	if err != nil {
-		// return empty list
 		return nil, err
 	}
 	defer rows.Close()

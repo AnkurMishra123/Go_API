@@ -15,9 +15,6 @@ type CarHandler struct {
 }
 
 func NewCarHandler(cc *controllers.CarController, db *sql.DB) *CarHandler {
-		//create the table if it doesn't exist
-		
-	// _, err := db.Exec("CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, brand TEXT, Model TEXT, Color TEXT, Status TEXT )")
 
 	_, err := db.Exec("CREATE TABLE IF NOT EXISTS cars (id SERIAL PRIMARY KEY, brand TEXT, model TEXT, color TEXT, status TEXT )")
 
@@ -44,18 +41,15 @@ func (ch *CarHandler) AddCarToGarage(ctx *gofr.Context) (interface{}, error) {
 }
 
 func (ch *CarHandler) GetCarsInGarage(ctx *gofr.Context) (interface{}, error) {
-	// Parse URL parameters
 	cars, err := ch.carController.GetCarsInGarage()
 	b, err := json.Marshal(cars)
 	if err != nil {
 		return nil, err
 	}
 	return string(b), nil
-	// return *cars, nil
 }
 
 func (ch *CarHandler) GetCarInGarage(ctx *gofr.Context) (interface{}, error) {
-	// Parse URL parameters
 	id,err:=strconv.Atoi(ctx.PathParam("id"))
 	if err != nil {
 		return nil, err
@@ -64,8 +58,6 @@ func (ch *CarHandler) GetCarInGarage(ctx *gofr.Context) (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	// Write JSON response
 	return car, nil
 }
 
@@ -83,13 +75,11 @@ func (ch *CarHandler) UpdateCarInGarage(ctx *gofr.Context) (interface{}, error) 
 	if err != nil {
 		return nil, err
 	}
-
-	// Write JSON response
 	return updated_car, nil
 }
 
 func (ch *CarHandler) RemoveCarFromGarage(ctx *gofr.Context) (interface{}, error) {
-	// Parse URL parameters
+
 	id,err:=strconv.Atoi(ctx.PathParam("id"))
 	if err != nil {
 		return nil, err
@@ -98,7 +88,5 @@ func (ch *CarHandler) RemoveCarFromGarage(ctx *gofr.Context) (interface{}, error
 	if err := ch.carController.RemoveCarFromGarage(id); err != nil {
 		return nil, err
 	}
-
-	// Write JSON response
 	return nil, nil
 }
