@@ -1,6 +1,8 @@
 # Car Garage 
 ![legoshichat](https://us.123rf.com/450wm/listygrey/listygrey2004/listygrey200400074/144873445-car-outline-automotive-sign-for-your-projects.jpg?ver=6)
 
+Check out the documentation [here](https://ankur-docs-car-garage.netlify.app/).
+
 Welcome to the Car Garage API, the official interface for managing cars in a garage. Experience the integration and access the unique features of Car Garage through this official API.
 
 This API holds five endpoints
@@ -15,15 +17,10 @@ This API holds five endpoints
 
 - DELETE //Delete the details of the Car from the garage after leaving
 
-
-## Documentation
-Check out the documentation [here](https://ankur-docs-car-garage.netlify.app/).
-
-## Roadmap
+## Walkway
 - [x] API Spec
 - [x] API Implementation
 - [ ] Unit Testing **60% <**
-
 
 ## Steps To Run
 
