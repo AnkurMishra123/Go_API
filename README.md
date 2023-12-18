@@ -9,7 +9,7 @@ This API holds five endpoints
 
 - POST //Create New Cars Entry
 
-- GET //Get all Cars detail in the workshop
+- GET //Get all Car details in the workshop
 
 - GET //Get Car details by ID
 
@@ -20,7 +20,7 @@ This API holds five endpoints
 ## Walkway
 - [x] API Spec
 - [x] API Implementation
-- [ ] Unit Testing **60% <**
+- [ ] Unit Testing **< 60%**
 
 ## Steps To Run
 
